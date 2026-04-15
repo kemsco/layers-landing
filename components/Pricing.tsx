@@ -1,0 +1,106 @@
+"use client";
+import { motion } from "framer-motion";
+
+const DISPLAY = "var(--font-space), sans-serif";
+const BODY = "var(--font-inter), sans-serif";
+
+const plans = [
+  { name: "Starter", tag: "Pour débuter", desc: "Agences débutant en GEO", price: "Beta", note: "Places limitées", features: ["Dashboard LLM multi-clients", "Rapports automatiques", "Portail partenaire", "Seats illimités", "Projets illimités"], cta: "Démarrer", highlight: false },
+  { name: "Growth", tag: "Le plus populaire", desc: "10–20 clients actifs", price: "Beta", note: "Places limitées", features: ["Tout Starter inclus", "White-label complet", "Crédits supplémentaires", "Slack dédié", "1h de call/mois"], cta: "Choisir Growth", highlight: true },
+  { name: "Pro", tag: "Pour les leaders", desc: "20+ clients SEO-first", price: "Sur devis", note: "Onboarding dédié", features: ["Tout Growth inclus", "Accompagnement premium", "2h de call/mois", "Feature requests prioritaires", "Onboarding dédié"], cta: "Contacter l'équipe", highlight: false },
+];
+
+export default function Pricing() {
+  return (
+    <section style={{ padding: "128px 24px", background: "#000", position: "relative" }}>
+      <div style={{ position: "absolute", inset: 0, pointerEvents: "none",
+        backgroundImage: "linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px)",
+        backgroundSize: "64px 64px" }} />
+
+      <div style={{ maxWidth: 1000, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          style={{ textAlign: "center", marginBottom: 20 }}>
+          <span style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "#444", fontFamily: BODY }}>Tarifs</span>
+        </motion.div>
+
+        <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          style={{ fontFamily: DISPLAY, fontWeight: 700, textAlign: "center", fontSize: "clamp(30px, 4.5vw, 54px)", letterSpacing: "-0.03em", lineHeight: 1.1, marginBottom: 16 }}>
+          Un investissement.
+          <br /><span style={{ color: "#333" }}>Pas un coût.</span>
+        </motion.h2>
+
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          style={{ textAlign: "center", fontSize: 16, color: "#555", maxWidth: 480, margin: "0 auto 64px", lineHeight: 1.7, fontFamily: BODY }}>
+          Chaque plan inclut <span style={{ color: "#888" }}>seats et projets illimités</span>. Crédits additionnels à la carte.
+        </motion.p>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }}>
+          {plans.map((plan, i) => (
+            <motion.div key={plan.name}
+              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              style={{
+                borderRadius: 18, padding: "28px 26px", display: "flex", flexDirection: "column", position: "relative",
+                background: plan.highlight ? "#fff" : "#080808",
+                border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.07)",
+              }}
+            >
+              {plan.highlight && (
+                <div style={{ position: "absolute", top: -12, left: "50%", transform: "translateX(-50%)", background: "#fff", color: "#000", fontSize: 11, fontWeight: 600, padding: "4px 14px", borderRadius: 99, fontFamily: DISPLAY, whiteSpace: "nowrap" }}>
+                  ✦ {plan.tag}
+                </div>
+              )}
+
+              <div style={{ marginBottom: 24 }}>
+                <div style={{ fontFamily: DISPLAY, fontSize: 18, fontWeight: 700, letterSpacing: "-0.02em", color: plan.highlight ? "#000" : "#fff", marginBottom: 4 }}>{plan.name}</div>
+                {!plan.highlight && <div style={{ fontSize: 11, color: "#555", fontFamily: BODY, marginBottom: 2 }}>{plan.tag}</div>}
+                <div style={{ fontSize: 12, color: plan.highlight ? "#888" : "#444", fontFamily: BODY }}>{plan.desc}</div>
+              </div>
+
+              <div style={{ borderTop: `1px solid ${plan.highlight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.06)"}`, borderBottom: `1px solid ${plan.highlight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.06)"}`, padding: "16px 0", marginBottom: 22 }}>
+                <div style={{ fontFamily: DISPLAY, fontSize: 24, fontWeight: 700, letterSpacing: "-0.03em", color: plan.highlight ? "#000" : "#fff" }}>{plan.price}</div>
+                <div style={{ fontSize: 11, color: plan.highlight ? "#888" : "#444", fontFamily: BODY, marginTop: 2 }}>{plan.note}</div>
+              </div>
+
+              <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10, marginBottom: 28, flex: 1 }}>
+                {plan.features.map(f => (
+                  <li key={f} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ marginTop: 1, flexShrink: 0 }}>
+                      <circle cx="7" cy="7" r="6.5" stroke={plan.highlight ? "rgba(0,0,0,0.15)" : "rgba(255,255,255,0.12)"} />
+                      <path d="M4.5 7l1.8 1.8 3.2-3.2" stroke={plan.highlight ? "#000" : "rgba(255,255,255,0.5)"} strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span style={{ fontSize: 13, color: plan.highlight ? "#333" : "#666", fontFamily: BODY }}>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button style={{
+                width: "100%", padding: "12px", borderRadius: 10, fontSize: 14, fontWeight: 600,
+                cursor: "pointer", transition: "opacity 0.2s", fontFamily: DISPLAY, letterSpacing: "-0.01em",
+                background: plan.highlight ? "#000" : "rgba(255,255,255,0.05)",
+                color: plan.highlight ? "#fff" : "#777",
+                border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.08)",
+              }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = "0.8")}
+                onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+              >{plan.cta}</button>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Anti-FUD */}
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{ marginTop: 36, display: "flex", gap: 24, justifyContent: "center", flexWrap: "wrap" }}>
+          {["Seats & projets illimités", "Crédits à la carte", "Stripe sécurisé", "Accompagnement inclus", "Sans engagement"].map(item => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#444", fontFamily: BODY }}>
+              <span style={{ color: "#555" }}>✓</span>{item}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
