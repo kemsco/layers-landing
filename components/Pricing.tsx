@@ -5,9 +5,55 @@ const D = "var(--font-space), sans-serif";
 const B = "var(--font-inter), sans-serif";
 
 const plans = [
-  { name: "Starter", tag: "Pour débuter", desc: "Agences débutant en GEO", price: "Beta", note: "Places limitées", features: ["Dashboard LLM multi-clients", "Rapports automatiques", "Portail partenaire", "Seats illimités", "Projets illimités"], cta: "Démarrer", highlight: false },
-  { name: "Growth", tag: "Le plus populaire", desc: "10–20 clients actifs", price: "Beta", note: "Places limitées", features: ["Tout Starter inclus", "White-label complet", "Crédits supplémentaires", "Slack dédié", "1h de call/mois"], cta: "Choisir Growth", highlight: true },
-  { name: "Pro", tag: "Pour les leaders", desc: "20+ clients SEO-first", price: "Sur devis", note: "Onboarding dédié", features: ["Tout Growth inclus", "Accompagnement premium", "2h de call/mois", "Feature requests prioritaires", "Onboarding dédié"], cta: "Contacter l'équipe", highlight: false },
+  {
+    name: "Starter",
+    tag: "Pour commencer",
+    desc: "Pour les agences qui veulent gagner des pitchs en créant des rapports légers.",
+    price: "Beta",
+    note: "Accès limité",
+    features: [
+      "Jusqu'à X crédits / mois",
+      "Accès portail partenaire",
+      "Dashboard LLM clients",
+      "Rapports automatiques",
+      "Support email",
+    ],
+    cta: "Commencer →",
+    highlight: false,
+  },
+  {
+    name: "Agency",
+    tag: "Recommandé",
+    desc: "Pour les agences qui font du GEO une ligne de service à part entière.",
+    price: "Beta",
+    note: "Accès prioritaire",
+    features: [
+      "Jusqu'à X crédits / mois",
+      "Rapports white-label",
+      "Seats & projets illimités",
+      "Slack dédié + 2h call / mois",
+      "Connecteur Looker Studio natif",
+      "Sales assets inclus",
+    ],
+    cta: "Demander une démo →",
+    highlight: true,
+  },
+  {
+    name: "Scale",
+    tag: "Grands portefeuilles",
+    desc: "Pour les agences qui gèrent un portefeuille large avec des niveaux de service différenciés.",
+    price: "Sur devis",
+    note: "Onboarding dédié",
+    features: [
+      "Crédits sur mesure",
+      "Tout Agency inclus",
+      "Accompagnement roadmap",
+      "Onboarding équipe dédié",
+      "SLA prioritaire",
+    ],
+    cta: "Nous contacter →",
+    highlight: false,
+  },
 ];
 
 export default function Pricing() {
@@ -28,14 +74,19 @@ export default function Pricing() {
         </motion.h2>
 
         <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.15 }}
-          style={{ textAlign: "center", fontSize: 16, color: "#4a4a4a", maxWidth: 480, margin: "0 auto 72px", lineHeight: 1.75, fontFamily: B }}>
-          Chaque plan inclut <span style={{ color: "#888" }}>seats et projets illimités</span>. Crédits additionnels à la carte.
+          style={{ textAlign: "center", fontSize: 14, color: "#3a3a3a", maxWidth: 560, margin: "0 auto 16px", lineHeight: 1.75, fontFamily: B }}>
+          Le GEO n'est pas une option pour les agences qui veulent rester compétitives.
+        </motion.p>
+        <motion.p initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }}
+          style={{ textAlign: "center", fontSize: 14, color: "#4a4a4a", maxWidth: 480, margin: "0 auto 72px", lineHeight: 1.75, fontFamily: B }}>
+          Layers est le seul outil qui vous permet de le faire <span style={{ color: "#777" }}>avec seats et projets illimités</span>.
         </motion.p>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
           {plans.map((plan, i) => (
             <motion.div key={plan.name}
-              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               whileHover={plan.highlight ? {} : { y: -4, borderColor: "rgba(255,255,255,0.12)" }}
               style={{
                 borderRadius: 20, padding: "30px 28px", display: "flex", flexDirection: "column", position: "relative",
@@ -45,12 +96,12 @@ export default function Pricing() {
                 overflow: "hidden",
               }}
             >
-              {/* Glow on popular */}
               {plan.highlight && (
                 <>
                   <div style={{ position: "absolute", inset: 0, borderRadius: 20, background: "linear-gradient(135deg, #fff 0%, #f0f0f0 100%)" }} />
                   <motion.div
-                    animate={{ x: ["−100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
+                    animate={{ x: ["-100%", "200%"] }}
+                    transition={{ duration: 3, repeat: Infinity, repeatDelay: 3, ease: "easeInOut" }}
                     style={{ position: "absolute", top: 0, bottom: 0, width: "35%", background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.04), transparent)", transform: "skewX(-12deg)", pointerEvents: "none", zIndex: 1 }}
                   />
                 </>
@@ -65,8 +116,8 @@ export default function Pricing() {
 
                 <div style={{ marginBottom: 22 }}>
                   <div style={{ fontFamily: D, fontSize: 18, fontWeight: 700, letterSpacing: "-0.03em", color: plan.highlight ? "#000" : "#fff", marginBottom: 4 }}>{plan.name}</div>
-                  {!plan.highlight && <div style={{ fontSize: 11, color: "#3a3a3a", fontFamily: B, marginBottom: 2 }}>{plan.tag}</div>}
-                  <div style={{ fontSize: 12, color: plan.highlight ? "#777" : "#3a3a3a", fontFamily: B }}>{plan.desc}</div>
+                  {!plan.highlight && <div style={{ fontSize: 11, color: "#3a3a3a", fontFamily: B, marginBottom: 4 }}>{plan.tag}</div>}
+                  <div style={{ fontSize: 12, color: plan.highlight ? "#777" : "#3a3a3a", fontFamily: B, lineHeight: 1.6 }}>{plan.desc}</div>
                 </div>
 
                 <div style={{ borderTop: `1px solid ${plan.highlight ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.06)"}`, borderBottom: `1px solid ${plan.highlight ? "rgba(0,0,0,0.1)" : "rgba(255,255,255,0.06)"}`, padding: "16px 0", marginBottom: 22 }}>
@@ -87,7 +138,7 @@ export default function Pricing() {
                 </ul>
 
                 <motion.button whileHover={{ opacity: 0.85 }} whileTap={{ scale: 0.97 }}
-                  style={{ width: "100%", padding: "13px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: D, letterSpacing: "-0.01em", background: plan.highlight ? "#000" : "rgba(255,255,255,0.05)", color: plan.highlight ? "#fff" : "#666", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.07)" }}>
+                  style={{ width: "100%", padding: "13px", borderRadius: 10, fontSize: 14, fontWeight: 700, cursor: "pointer", fontFamily: D, letterSpacing: "-0.01em", background: plan.highlight ? "#000" : "rgba(255,255,255,0.05)", color: plan.highlight ? "#fff" : "#555", border: plan.highlight ? "none" : "1px solid rgba(255,255,255,0.07)" }}>
                   {plan.cta}
                 </motion.button>
               </div>
@@ -97,9 +148,9 @@ export default function Pricing() {
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }}
           style={{ marginTop: 36, display: "flex", gap: 28, justifyContent: "center", flexWrap: "wrap" }}>
-          {["Seats & projets illimités", "Crédits à la carte", "Stripe sécurisé", "Accompagnement inclus", "Sans engagement"].map(item => (
-            <div key={item} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#3a3a3a", fontFamily: B }}>
-              <span style={{ color: "#4a4a4a" }}>✓</span>{item}
+          {["Seats & projets illimités", "Crédits à la carte", "Sans engagement", "Accompagnement inclus", "Paiement sécurisé Stripe"].map(item => (
+            <div key={item} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 12, color: "#2e2e2e", fontFamily: B }}>
+              <span style={{ color: "#3a3a3a" }}>✓</span>{item}
             </div>
           ))}
         </motion.div>

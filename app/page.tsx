@@ -1,8 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
-import Problem from "@/components/Problem";
-import Solution from "@/components/Solution";
+import TrustBar from "@/components/TrustBar";
+import Benefits from "@/components/Benefits";
 import HowItWorks from "@/components/HowItWorks";
 import SocialProof from "@/components/SocialProof";
 import Pricing from "@/components/Pricing";
@@ -12,12 +11,11 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main style={{ minHeight: "100vh", background: "#000", color: "#fff" }}>
       <Navbar />
       <Hero />
-      <Marquee />
-      <Problem />
-      <Solution />
+      <TrustBar />
+      <Benefits />
       <HowItWorks />
       <SocialProof />
       <Pricing />

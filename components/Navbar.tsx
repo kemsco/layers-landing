@@ -2,10 +2,11 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const D = "var(--font-space), sans-serif";
+const B = "var(--font-inter), sans-serif";
 
 export default function Navbar() {
   const { scrollY } = useScroll();
-  const bg = useTransform(scrollY, [0, 60], ["rgba(0,0,0,0)", "rgba(8,8,8,0.9)"]);
+  const bg = useTransform(scrollY, [0, 60], ["rgba(0,0,0,0)", "rgba(8,8,8,0.92)"]);
   const border = useTransform(scrollY, [0, 60], ["rgba(255,255,255,0)", "rgba(255,255,255,0.07)"]);
 
   return (
@@ -23,6 +24,7 @@ export default function Navbar() {
         border: "1px solid", borderColor: border,
         padding: "0 20px",
       }}>
+        {/* Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
             <rect width="9" height="9" rx="2" fill="white" />
@@ -34,10 +36,10 @@ export default function Navbar() {
         </div>
 
         <nav style={{ display: "flex", gap: 28 }}>
-          {["Solution", "Tarifs", "FAQ"].map(l => (
-            <a key={l} href="#" style={{ fontSize: 13, color: "#666", textDecoration: "none", fontFamily: D, fontWeight: 500, transition: "color 0.2s" }}
+          {["Produit", "Cas d'usage", "Tarifs", "À propos"].map(l => (
+            <a key={l} href="#" style={{ fontSize: 13, color: "#555", textDecoration: "none", fontFamily: B, fontWeight: 500, transition: "color 0.2s" }}
               onMouseEnter={e => (e.currentTarget.style.color = "#fff")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#666")}>{l}</a>
+              onMouseLeave={e => (e.currentTarget.style.color = "#555")}>{l}</a>
           ))}
         </nav>
 
@@ -48,7 +50,7 @@ export default function Navbar() {
             background: "#fff", color: "#000", border: "none",
             borderRadius: 8, cursor: "pointer", fontFamily: D, letterSpacing: "-0.01em",
           }}>
-          Accès beta →
+          Demander une démo →
         </motion.button>
       </motion.div>
     </motion.header>
